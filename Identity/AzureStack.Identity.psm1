@@ -253,7 +253,8 @@ function Update-AzsHomeDirectoryTenant {
 
     # Install-Module AzureRm
     Import-Module 'AzureRm.Profile' -Verbose:$false 4> $null
-    Import-Module "$PSScriptRoot\GraphAPI\GraphAPI.psm1" -Verbose:$false 4> $null
+    $myDir = Split-Path $PSScriptRoot
+    Import-Module "$mydir\GraphAPI\GraphAPI.psm1" -Verbose:$false 4> $null
 
     function Invoke-Main {
         # Initialize the Azure PowerShell module to communicate with the Azure Resource Manager in the public cloud corresponding to the Azure Stack Graph Service. Will prompt user for credentials.
@@ -506,6 +507,7 @@ function Update-AzsHomeDirectoryTenant {
         Write-Warning "An error has occurred; more information may be found in the log file '$logFile'" -WarningAction Continue
         throw
     }
+    Get-content -Path $logFile | write-output
 }
 
 <#
@@ -547,7 +549,8 @@ function Register-AzsWithMyDirectoryTenant {
 
     # Install-Module AzureRm
     Import-Module 'AzureRm.Profile' -Verbose:$false 4> $null
-    Import-Module "$PSScriptRoot\GraphAPI\GraphAPI.psm1" -Verbose:$false 4> $null
+    $myDir = Split-Path $PSScriptRoot
+    Import-Module "$mydir\GraphAPI\GraphAPI.psm1" -Verbose:$false 4> $null
 
     function Invoke-Main {
         # Initialize the Azure PowerShell module to communicate with the Azure Resource Manager in the public cloud corresponding to the Azure Stack Graph Service. Will prompt user for credentials.
@@ -810,6 +813,7 @@ function Register-AzsWithMyDirectoryTenant {
         Write-Warning "An error has occurred; more information may be found in the log file '$logFile'" -WarningAction Continue
         throw
     }
+    Get-content -Path $logFile | write-output
 }
 
 <#
@@ -1003,7 +1007,8 @@ function Unregister-AzsWithMyDirectoryTenant {
     
     # Install-Module AzureRm
     Import-Module 'AzureRm.Profile' -Verbose:$false 4> $null
-    Import-Module "$PSScriptRoot\GraphAPI\GraphAPI.psm1" -Verbose:$false 4> $null
+    $myDir = Split-Path $PSScriptRoot
+    Import-Module "$mydir\GraphAPI\GraphAPI.psm1" -Verbose:$false 4> $null
     
     function Invoke-Main {
         Write-DecommissionImplicationsWarning
@@ -1172,6 +1177,7 @@ function Unregister-AzsWithMyDirectoryTenant {
         Write-Warning "An error has occurred; more information may be found in the log file '$logFile'" -WarningAction Continue
         throw
     }
+    Get-content -Path $logFile | write-output
 }
 
 Export-ModuleMember -Function @(
